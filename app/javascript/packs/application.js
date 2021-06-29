@@ -15,3 +15,7 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+// Support component names relative to this directory:
+let componentRequireContext = require.context("components", true);
+let ReactRailsUJS = require("react_ujs");
+ReactRailsUJS.useContext(componentRequireContext);

@@ -1,7 +1,17 @@
 import React from "react"
+import { Layout } from "antd"
+import Sidebar from "./home/Sidebar"
+import Index from "./expenses/Index"
+
+const { Content } = Layout
 
 export default function App() {
   return (
-    <div>This is where the App will live</div>
+    <Layout>
+      <Sidebar />
+      <Content>
+        <Index />
+      </Content>
+    </Layout>
   )
 }

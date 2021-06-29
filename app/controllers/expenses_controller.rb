@@ -2,7 +2,9 @@
 
 # :Expense Controller:
 class ExpensesController < ApplicationController
-  def index; end
+  def index
+    @expenses = Expense.all
+  end
 
   def new
     @expense = Expense.new(expense_params)
