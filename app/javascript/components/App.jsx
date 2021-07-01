@@ -10,10 +10,10 @@ export default function App() {
   return (
     <Layout>
       <Row>
-        <Col span={3}>
+        <Col span={4}>
           <Sidebar />
         </Col>
-        <Col span={21}>
+        <Col span={20}>
           <Content>
             <Dashboard />
           </Content>

@@ -4,8 +4,6 @@ import ExpenseList from "../expenses/ExpenseList";
 
 export default function Dashboard() {
   return(
-    <Layout>
-      <ExpenseList />
-    </Layout>
+    <ExpenseList />
   )
 }

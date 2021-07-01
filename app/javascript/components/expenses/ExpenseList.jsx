@@ -1,55 +1,66 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
-import { Layout, Table } from "antd"
-const { Content } = Layout
+import { Table, Popconfirm } from "antd"
+import Notification from "../../utils/Notification"
 
 export default function ExpenseList(props) {
   const [loading, isLoading] = useState(true)
   const [expenseList, setExpenseList] = useState({})
 
-  // function createExpenseList(param) {
-  //   param
-  // }
+  function createExpenseList(expenses) {
+    const expenseArray = expenses.map((expense) => ({
+      key: expense.id,
+      id: expense.id,
+      amount: expense.amount,
+      reason: expense.reason
+    }))
+    setExpenseList({expenseArray})
+  }
+
+  function deleteExpense(expense_id) {
+    axios({method: 'delete', url: `api/v1/expenses/${expense_id}`})
+      .then((response) => {
+        Notification(response.data)
+      })
+  }
 
   useEffect(() => {
     if (props.length === 0) {
-      const expenses = props.expenses.map((expense) => ({
-        key: expense.id,
-        referenceId: expense.reference_id,
-        expenseType: expense.expense_type
-      }))
-      setExpenseList({expenses})
+      createExpenseList(props.expenses)
     } else {
       axios({method: 'get', url: 'api/v1/expenses'})
         .then((response) => {
-          console.log(response)
-          const expenses = response.data.results.map((expense) => ({
-            key: expense.id,
-            referenceId: expense.reference_id,
-            expenseType: expense.expense_type
-          }))
-          setExpenseList({expenses});
+          createExpenseList(response.data)
         })
     }
-  })
+  }, [])
 
   const columns = [{
-    title: 'Reference ID',
-    dataIndex: 'referenceId',
-    key: 'referenceId',
+    title: 'Reason',
+    dataIndex: 'reason',
+    key: 'reason',
   },{
-    title: 'Expense Type',
-    dataIndex: 'expenseType',
-    key: 'expenseType',
+    title: 'Amount',
+    dataIndex: 'amount',
+    key: 'amount',
+  },{
+    title: "",
+    key: "action",
+    render: (_text, record) => (
+      <Popconfirm
+        title="Are you sure to delete this expense?"
+        onConfirm={() => deleteExpense(record.id)} okText="Yes" cancelText="No">
+        <a href="#" type="danger">
+          Delete{" "}
+        </a>
+      </Popconfirm>
+    )
   }]
 
   return(
-    <Layout className="layout">
-      <Content>
-        <div className="expenses-container">
-          {/*<Table dataSource={expenseList} columns={columns} />*/}
-        </div>
-      </Content>
-    </Layout>
+    <div className="expenses-container">
+      <h1>Expenses</h1>
+      <Table className="table-striped-rows" dataSource={expenseList.expenseArray} columns={columns} />
+    </div>
   )
 }

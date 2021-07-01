@@ -22,9 +22,7 @@ export default function Sidebar() {
               </Menu.Item>
             </Menu>
             <Switch>
-              <Route path="api/v1/expenses">
-                <ExpenseList />
-              </Route>
+              <Route path="api/v1/expenses" exact component={ExpenseList} />
             </Switch>
           </div>
         </Router>
