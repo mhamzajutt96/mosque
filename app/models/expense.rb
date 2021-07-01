@@ -2,5 +2,8 @@
 
 # :Expense Model:
 class Expense < ApplicationRecord
-  enum expense_type: { bill: 0, person: 1, other: 2 }
+  belongs_to :masjid
+  has_one :employee_expense, dependent: :destroy
+  has_one :employee, through: :employee_expense
+  has_one :bill, dependent: :destroy
 end
