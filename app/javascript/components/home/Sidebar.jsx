@@ -1,6 +1,6 @@
 import React from "react"
 import { Layout } from "antd"
-import Routes from "../../config/Routes";
+import Routes from "../../config/Routes"
 
 export default function Sidebar() {
   return (

@@ -1,8 +1,6 @@
 import React from "react"
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import Analytics from "../components/home/Analytics";
-import ExpenseList from "../components/expenses/ExpenseList";
-import { Menu } from "antd";
+import { Link } from "react-router-dom"
+import { Menu } from "antd"
 
 export default function Routes() {
   return(

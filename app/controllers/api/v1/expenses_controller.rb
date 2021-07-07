@@ -17,13 +17,11 @@ module Api
 
       def create
         @expense = Expense.new(expense_params)
-        respond_to do |format|
-          if @expense.save
-            format.html { redirect_to @expense, notice: 'Expense created successfully' }
-          else
-            format.html { redirect_to expenses_path, alert: @expense.errors.full_messages.join(' ') }
-          end
-          format.js
+        @expense.masjid_id = 1
+        if @expense.save
+          render json: { success: true, data: @expense, message: 'Expense created successfully' }
+        else
+          render json: { success: false, data: {}, message: @expense.errors.full_messages.join(' ') }
         end
       end
 
@@ -44,7 +42,7 @@ module Api
       end
 
       def expense_params
-        params.require(:expense).permit(:reference_id, :expense_type)
+        params.require(:expense).permit(:masjid_id, :amount, :reason)
       end
     end
   end

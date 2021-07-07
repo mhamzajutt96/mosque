@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
-import { Table, Popconfirm } from "antd"
+import {Table, Popconfirm, Row, Col} from "antd"
 import Notification from "../../utils/Notification"
+import { Link } from "react-router-dom"
 
 export default function ExpenseList(props) {
   const [loading, isLoading] = useState(true)
@@ -64,8 +65,14 @@ export default function ExpenseList(props) {
 
   return(
     <div className="expenses-container">
-      {console.log('Inside expenses')}
-      <h1>Expenses</h1>
+      <Row>
+        <Col span={12}>
+          <h1 className="expenses-heading">Expenses</h1>
+        </Col>
+        <Col span={12}>
+          <Link to="/api/v1/expenses/new">Add new expense</Link>
+        </Col>
+      </Row>
       <Table className="table-striped-rows" dataSource={expenseList.expenseArray} columns={columns} />
     </div>
   )

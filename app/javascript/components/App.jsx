@@ -1,9 +1,8 @@
 import React from "react"
-import {Col, Layout, Row} from "antd"
+import { Col, Layout, Row } from "antd"
 import 'antd/dist/antd.css'
 import Sidebar from "./home/Sidebar"
 import Dashboard from "./home/Dashboard"
-import Analytics from "./home/Analytics";
 
 const { Content } = Layout
 

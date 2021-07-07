@@ -1,7 +1,8 @@
 import React from "react"
-import {Route, Switch} from "react-router-dom";
-import Analytics from "./Analytics";
-import ExpenseList from "../expenses/ExpenseList";
+import { Route, Switch } from "react-router-dom"
+import Analytics from "./Analytics"
+import ExpenseList from "../expenses/ExpenseList"
+import NewExpense from "../expenses/NewExpense"
 
 export default function Dashboard() {
   return(
@@ -11,6 +12,9 @@ export default function Dashboard() {
       </Switch>
       <Switch>
         <Route path="/api/v1/expenses" exact component={ExpenseList} />
+      </Switch>
+      <Switch>
+        <Route path="/api/v1/expenses/new" exact component={NewExpense} />
       </Switch>
     </div>
   )
