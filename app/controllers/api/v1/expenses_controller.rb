@@ -11,10 +11,6 @@ module Api
         render json: @expenses
       end
 
-      def new
-        @expense = Expense.new(expense_params)
-      end
-
       def create
         @expense = Expense.new(expense_params)
         @expense.masjid_id = 1

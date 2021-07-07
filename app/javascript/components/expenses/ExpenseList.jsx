@@ -5,7 +5,6 @@ import Notification from "../../utils/Notification"
 import { Link } from "react-router-dom"
 
 export default function ExpenseList(props) {
-  const [loading, isLoading] = useState(true)
   const [expenseList, setExpenseList] = useState({})
 
   function createExpenseList(expenses) {
@@ -27,17 +26,14 @@ export default function ExpenseList(props) {
   }
 
   useEffect(() => {
-    if (props.length === 0) {
-      createExpenseList(props.expenses)
-    } else {
-      fetchExpenses()
-    }
+    fetchExpenses()
   }, [])
 
   function fetchExpenses() {
     axios({method: 'get', url: '/api/v1/expenses'})
       .then((response) => {
-        createExpenseList(response.data)
+        console.log(response)
+        createExpenseList(response.data.data)
       })
   }
 
