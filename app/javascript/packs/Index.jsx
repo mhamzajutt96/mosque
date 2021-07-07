@@ -1,8 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from "../components/App"
+import {BrowserRouter as Router} from "react-router-dom";
 
-function Index() { return(<App />) }
+function Index() {
+  return(
+    <Router>
+      <App />
+    </Router>
+  )
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(

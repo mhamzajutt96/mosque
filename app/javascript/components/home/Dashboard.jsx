@@ -1,9 +1,17 @@
 import React from "react"
-import {Layout} from "antd";
+import {Route, Switch} from "react-router-dom";
+import Analytics from "./Analytics";
 import ExpenseList from "../expenses/ExpenseList";
 
 export default function Dashboard() {
   return(
-    <ExpenseList />
+    <div>
+      <Switch>
+        <Route path="/" exact component={Analytics} />
+      </Switch>
+      <Switch>
+        <Route path="/api/v1/expenses" exact component={ExpenseList} />
+      </Switch>
+    </div>
   )
 }

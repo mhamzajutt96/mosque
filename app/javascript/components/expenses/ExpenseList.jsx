@@ -18,8 +18,9 @@ export default function ExpenseList(props) {
   }
 
   function deleteExpense(expense_id) {
-    axios({method: 'delete', url: `api/v1/expenses/${expense_id}`})
+    axios({method: 'delete', url: `/api/v1/expenses/${expense_id}`})
       .then((response) => {
+        fetchExpenses()
         Notification(response.data)
       })
   }
@@ -28,12 +29,16 @@ export default function ExpenseList(props) {
     if (props.length === 0) {
       createExpenseList(props.expenses)
     } else {
-      axios({method: 'get', url: 'api/v1/expenses'})
-        .then((response) => {
-          createExpenseList(response.data)
-        })
+      fetchExpenses()
     }
   }, [])
+
+  function fetchExpenses() {
+    axios({method: 'get', url: '/api/v1/expenses'})
+      .then((response) => {
+        createExpenseList(response.data)
+      })
+  }
 
   const columns = [{
     title: 'Reason',
@@ -59,6 +64,7 @@ export default function ExpenseList(props) {
 
   return(
     <div className="expenses-container">
+      {console.log('Inside expenses')}
       <h1>Expenses</h1>
       <Table className="table-striped-rows" dataSource={expenseList.expenseArray} columns={columns} />
     </div>
