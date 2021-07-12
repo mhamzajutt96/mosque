@@ -1,1 +1,18 @@
-= react_component("expenses/ExpenseList", { expenses: @expenses })
+.container-fluid
+  .row
+    .col
+      %table.table.table-hover
+        %thead
+          %tr
+            %th Amount
+            %th Reason
+            %th{ colspan: 2 } Actions
+        %tbody
+          - @expenses.each do |expense|
+            %tr
+              %td= expense.amount
+              %td= expense.reason
+              %td
+                = link_to 'Edit', edit_api_v1_expense_path(expense), class: "btn btn-primary btn-sm"
+                = link_to 'Delete', api_v1_expense_path(expense), class: "btn btn-danger btn-sm",
+                method: :delete, confirm: { data: 'Are you sure?' }

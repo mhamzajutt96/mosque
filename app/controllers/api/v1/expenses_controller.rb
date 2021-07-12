@@ -18,17 +18,21 @@ module Api
         @expense = Expense.new(expense_params)
         @expense.masjid_id = 1
         if @expense.save
-          render json: { success: true, data: @expense, message: 'Expense created successfully' }
+          render json: { success: true, data: @expense, message: 'Expense created successfully.' }
         else
           render json: { success: false, data: {}, message: @expense.errors.full_messages.join(' ') }
         end
       end
 
       def destroy
-        if @expense.destroy
-          render json: { success: true, data: {}, message: 'Expense Deleted' }
-        else
-          render json: { success: false, data: @expense, message: @expense.errors.full_message.join('') }
+        respond_to do |format|
+          if @expense.destroy
+            format.html { redirect_to api_v1_expenses_path, notice: 'Expense deleted successfully.' }
+            format.json { render json: { success: true, data: {}, message: 'Expense Deleted' } }
+          else
+            format.html { redirect_to @expense, alert: @expense.errors.full_message.join('') }
+            format.json { render json: { success: false, data: @expense, message: @expense.errors.full_message.join('') } }
+          end
         end
       rescue StandardError => e
         render json: { success: false, data: {}, message: e.message }
