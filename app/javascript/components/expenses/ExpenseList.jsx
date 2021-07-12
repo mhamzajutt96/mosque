@@ -18,7 +18,7 @@ export default function ExpenseList(props) {
   }
 
   function deleteExpense(expense_id) {
-    axios({method: 'delete', url: `/api/v1/expenses/${expense_id}`})
+    axios({method: 'delete', url: `/api/v1/expenses/${expense_id}`, responseType: 'json'})
       .then((response) => {
         fetchExpenses()
         Notification(response.data)
@@ -30,10 +30,13 @@ export default function ExpenseList(props) {
   }, [])
 
   function fetchExpenses() {
-    axios({method: 'get', url: '/api/v1/expenses'})
+    axios({method: 'get', url: '/api/v1/expenses', headers: {
+      "Content-Type": "application/json",
+      Authorization: 'Bearer'
+    }})
       .then((response) => {
         console.log(response)
-        createExpenseList(response.data.data)
+        // createExpenseList(response.data.data)
       })
   }
 

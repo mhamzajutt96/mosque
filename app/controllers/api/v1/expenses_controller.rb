@@ -8,7 +8,10 @@ module Api
 
       def index
         @expenses = Expense.includes(:employee, :bill).order(created_at: :DESC)
-        render json: @expenses
+        respond_to do |format|
+          format.html {}
+          format.json { render json: { success: true, data: @expenses } }
+        end
       end
 
       def create
