@@ -1,7 +1,12 @@
-= form_for(@expense, url: api_v1_expenses_path) do |form|
-  = @expense.errors.full_messages.join(' ') if @expense.errors
-  = form.label :amount
-  = form.number_field :amount
-  = form.label :reason
-  = form.text_field :reason
-  = form.submit 'Add new expense'
+.expense-form
+  %h5.expense-heading Expense details
+  = form_for @expense, url: url do |form|
+    = @expense.errors.full_messages.join(' ') if @expense.errors
+    .form-floating.mb-3
+      = form.number_field :amount, class: 'form-control form-control-sm', id: 'expense_amount', placeholder: 'Amount'
+      = form.label :amount, { for: 'expense_amount' }
+    .form-floating
+      = form.text_field :reason, class: 'form-control form-control-sm', id: 'expense_reason', placeholder: 'Reason'
+      = form.label :reason, { for: 'expense_reason' }
+    = form.submit class: 'btn btn-primary btn-sm mt-2'
+

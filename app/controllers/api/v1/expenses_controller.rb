@@ -32,6 +32,20 @@ module Api
         end
       end
 
+      def edit; end
+
+      def update
+        respond_to do |format|
+          if @expense.update(expense_params)
+            format.html { redirect_to api_v1_expenses_path, notice: 'Expense updated successfully.' }
+            format.json { render json: { success: true, data: @expense, message: 'Expense updated successfully.' } }
+          else
+            format.html { render 'api/v1/expenses/edit' }
+            format.json { render json: { success: false, data: {}, message: @expense.errors.full_messages.join(' ') } }
+          end
+        end
+      end
+
       def destroy
         respond_to do |format|
           if @expense.destroy

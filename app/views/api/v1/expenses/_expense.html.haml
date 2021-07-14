@@ -1,0 +1,7 @@
+%tr
+  %td= expense.amount
+  %td= expense.reason
+  %td
+    = link_to 'Edit', edit_api_v1_expense_path(expense), class: "btn btn-primary btn-sm"
+    = link_to 'Delete', api_v1_expense_path(expense), class: "btn btn-danger btn-sm",
+              method: :delete, data: { confirm: 'Are you sure?' }
