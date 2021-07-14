@@ -4,7 +4,7 @@ module Api
   module V1
     # :Expense Controller:
     class ExpensesController < ApplicationController
-      before_action :set_expense, only: :destroy
+      before_action :set_expense, only: %i[edit update destroy]
 
       def index
         @expenses = Expense.includes(:employee, :bill).order(created_at: :DESC)
@@ -14,13 +14,21 @@ module Api
         end
       end
 
+      def new
+        @expense = Expense.new
+      end
+
       def create
         @expense = Expense.new(expense_params)
         @expense.masjid_id = 1
-        if @expense.save
-          render json: { success: true, data: @expense, message: 'Expense created successfully.' }
-        else
-          render json: { success: false, data: {}, message: @expense.errors.full_messages.join(' ') }
+        respond_to do |format|
+          if @expense.save
+            format.html { redirect_to api_v1_expenses_path, notice: 'Expense created successfully.' }
+            format.json { render json: { success: true, data: @expense, message: 'Expense created successfully.' } }
+          else
+            format.html { render 'api/v1/expenses/new' }
+            format.json { render json: { success: false, data: {}, message: @expense.errors.full_messages.join(' ') } }
+          end
         end
       end
 

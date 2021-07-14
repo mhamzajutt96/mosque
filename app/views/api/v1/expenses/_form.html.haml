@@ -1,0 +1,7 @@
+= form_for(@expense, url: api_v1_expenses_path) do |form|
+  = @expense.errors.full_messages.join(' ') if @expense.errors
+  = form.label :amount
+  = form.number_field :amount
+  = form.label :reason
+  = form.text_field :reason
+  = form.submit 'Add new expense'

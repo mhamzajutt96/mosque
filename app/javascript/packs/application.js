@@ -19,6 +19,7 @@ require("jquery")
 
 import "bootstrap/dist/js/bootstrap"
 import "bootstrap/dist/css/bootstrap"
+import "bootstrap-icons/font/bootstrap-icons.css"
 
 document.addEventListener("turbolinks:load", () => {
   $('[data-toggle="tooltip"]').tooltip()

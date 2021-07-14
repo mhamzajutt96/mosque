@@ -11,8 +11,9 @@
   </head>
 
   <body>
-    <div id="application">
-      <%= render 'layouts/notifications' if notice %>
+    <%= render 'layouts/sidebar' %>
+    <div class="container-fluid">
+      <%= render 'layouts/notifications' if (notice || alert) %>
       <%= yield %>
     </div>
   </body>
