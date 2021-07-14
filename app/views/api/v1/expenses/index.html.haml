@@ -1,11 +1,16 @@
 .row
-  %h5.expense-heading Expenses List
+  .col-md-4
+    %h5.expense-heading Expenses List
+  .col-md-8
+    = link_to 'Add new expense', new_api_v1_expense_path, class: 'btn btn-primary btn-sm', id: 'new-expense-button'
+.row
   .col
     %table.table.table-hover
       %thead
         %tr
           %th Amount
           %th Reason
+          %th Added on
           %th{ colspan: 2 } Actions
       %tbody
         = render @expenses
